@@ -8,7 +8,6 @@ function App() {
 		const name = form.name.value;
 		const email = form.email.value;
 		const user = { name, email };
-		// form.reset();
 		console.log(user);
 
 		fetch("http://localhost:5000/users", {
@@ -19,7 +18,13 @@ function App() {
 			body: JSON.stringify(user),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data));
+			.then((data) => {
+				console.log(data);
+				if (data.insertedId) {
+					alert("User Created Successfully");
+				}
+				form.reset();
+			});
 	};
 	return (
 		<>
